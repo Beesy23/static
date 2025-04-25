@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 from block_markdown import *
 from inline_markdown import *
 from gencontent import *
@@ -8,14 +9,19 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 
 static_path = os.path.join(project_root, "static")
-public_path = os.path.join(project_root, "public")
+doc_path = os.path.join(project_root, "doc")
 content_path = os.path.join(project_root, "content")
 template_path = os.path.join(project_root, "template.html")
 
 def main():
+
+    base_path = "/"
+    if len(sys.argv) > 1:
+        base_path = str(sys.argv[1])
+
     try:
         # Copies everything in static directory to public directory
-        copy_dir(static_path, public_path)
+        copy_dir(static_path, doc_path)
         print("Static files copied sucessfully")
     except Exception as e:
         print(f"Error occurred copying static files: {str(e)}")
@@ -24,7 +30,7 @@ def main():
 
     try:
         # Generates .html files in public directory for all .md files in content directory 
-        generate_page_recursive(content_path, template_path, public_path)
+        generate_page_recursive(content_path, template_path, doc_path, base_path)
         print("Function: generate_page_recursive executed")
     except Exception as e:
         print(f"Error occured generating pages: {str(e)}")
