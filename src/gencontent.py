@@ -4,14 +4,14 @@ from block_markdown import markdown_to_html_node
 def extract_title(markdown):
     lines = markdown.split("\n")
     for line in lines:
-        if line[:2] == "# ":
+        if line.startswith("# "):
             return line.lstrip("#").strip()
     raise Exception("No h1 header found")
 
 def generate_page(from_path, template_path, dest_path):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
     # Store from_path file to a variable
-    with open(from_path) as content_file:
+    with open(from_path,"r") as content_file:
         contents_from = content_file.read()
     # Store template_path file to a variable
     with open(template_path) as template_file:
