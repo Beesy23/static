@@ -9,7 +9,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 
 static_path = os.path.join(project_root, "static")
-doc_path = os.path.join(project_root, "doc")
+doc_path = os.path.join(project_root, "docs")
 content_path = os.path.join(project_root, "content")
 template_path = os.path.join(project_root, "template.html")
 
